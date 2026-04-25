@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Work by Chris Woodland — Video Editor, Filmmaker & Content Creator based in Los Angeles." />
+  <title>Work — Chris Woodland</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Pre-paint: if arriving from the about page, render the Contact button
+       in its cream state immediately — no flash, no animation. -->
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('fromAboutToWork') === 'true') {
+          document.documentElement.classList.add('from-about-page');
+        }
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
+</head>
+<body class="work-page-body">
+
+  <!-- Golden orange radial fill — expands from the Work nav link -->
+  <div class="page-reveal" id="page-reveal" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════ -->
+  <nav class="nav nav-dark" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">C<span>W</span></a>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta"><span>Contact</span></a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════
+       PAGE HEADER
+  ═══════════════════════════════════ -->
+  <header class="page-header section-orange">
+    <div class="container">
+      <p class="hero-eyebrow page-load-drop">Selected Projects</p>
+      <h1 class="page-header-title page-load-drop page-load-delay-1">Check Out My Work<span class="accent">.</span></h1>
+      <p class="page-header-sub page-load-drop page-load-delay-2">Film &bull; TV &bull; Social Media &bull; News &bull; Food &bull; Fitness &bull; And More</p>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════
+       WORK GRID
+  ═══════════════════════════════════ -->
+  <section class="work-page section-orange" aria-label="Work portfolio">
+    <div class="container">
+      <div class="work-page-grid">
+
+        <!--
+          HOW TO UPDATE VIDEOS:
+          ─────────────────────────────────────────────
+          YouTube cards:  data-video-type="youtube" + data-video-id="VIDEO_ID"
+          Drive/Instagram: data-video-type="link"   + data-video-url="FULL_URL"
+          YouTube thumbnails auto-load from img.youtube.com
+          ─────────────────────────────────────────────
+        -->
+
+        <!-- Card 1 — El Raspado Man -->
+        <article class="work-page-card page-load-item page-load-delay-3"
+                 data-video-type="link"
+                 data-video-url="https://www.youtube.com/watch?v=VOph4pQC70A"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: El Raspado Man — Film">
+          <div class="work-page-thumb">
+            <img src="https://img.youtube.com/vi/VOph4pQC70A/maxresdefault.jpg"
+                 alt="El Raspado Man"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">El Raspado Man</p>
+                <p class="work-page-category">Film</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 — Chris Koll Fitness Reel -->
+        <article class="work-page-card page-load-item page-load-delay-4"
+                 data-video-type="link"
+                 data-video-url="https://www.instagram.com/reel/DWXnXrkCSgf/?hl=en"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: Chris Koll Fitness Reel — Fitness">
+          <div class="work-page-thumb">
+            <img src="assets/images/CHRIS-KOLL.png"
+                 alt="Chris Koll Fitness Reel"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Chris Koll Fitness Reel</p>
+                <p class="work-page-category">Fitness</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 — Leola Restaurant Promo -->
+        <article class="work-page-card page-load-item page-load-delay-5"
+                 data-video-type="link"
+                 data-video-url="https://drive.google.com/file/d/1hdRx_NzkqQoWaz_gzjHOxPAe267DVlU8/view?usp=sharing"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: Leola Restaurant Promo — Food">
+          <div class="work-page-thumb">
+            <img src="assets/images/LEOLA.png"
+                 alt="Leola Restaurant Promo"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Leola Restaurant Promo</p>
+                <p class="work-page-category">Food</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 — JEANNA -->
+        <article class="work-page-card page-load-item page-load-delay-6"
+                 data-video-type="link"
+                 data-video-url="https://www.youtube.com/watch?v=CNbSakzy02w"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: JEANNA — Film">
+          <div class="work-page-thumb">
+            <img src="https://img.youtube.com/vi/CNbSakzy02w/maxresdefault.jpg"
+                 alt="JEANNA"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">JEANNA</p>
+                <p class="work-page-category">Film</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5 — Who Was Buster Trow? -->
+        <article class="work-page-card page-load-item page-load-delay-7"
+                 data-video-type="link"
+                 data-video-url="https://www.youtube.com/watch?v=K7Dj_eyfK1M"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: Who Was Buster Trow? — News">
+          <div class="work-page-thumb">
+            <img src="https://img.youtube.com/vi/K7Dj_eyfK1M/maxresdefault.jpg"
+                 alt="Who Was Buster Trow?"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Who Was Buster Trow?</p>
+                <p class="work-page-category">News</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 — Martone Street Sunday Sauce -->
+        <article class="work-page-card page-load-item page-load-delay-8"
+                 data-video-type="link"
+                 data-video-url="https://martonestreet.com/blogs/recipes/sunday-sauce"
+                 role="button"
+                 tabindex="0"
+                 aria-label="View: Martone Street Sunday Sauce Recipe — Food">
+          <div class="work-page-thumb">
+            <img src="assets/images/SUNDAY-SAUCE.png"
+                 alt="Martone Street Sunday Sauce Recipe"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Martone Street Sunday Sauce Recipe</p>
+                <p class="work-page-category">Food</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 7 — Martone Street × Sprouts -->
+        <article class="work-page-card page-load-item page-load-delay-9"
+                 data-video-type="link"
+                 data-video-url="https://www.instagram.com/reel/DTx7515CQaI/?hl=en"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: Martone Street × Sprouts: Eggplant Parmigiana — Food">
+          <div class="work-page-thumb">
+            <img src="assets/images/MARTONE-X-SPROUTS.png"
+                 alt="Martone Street × Sprouts: Eggplant Parmigiana"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Martone Street × Sprouts</p>
+                <p class="work-page-category">Food</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 — Scott Pilgrim (CSUN) -->
+        <article class="work-page-card page-load-item page-load-delay-10"
+                 data-video-type="link"
+                 data-video-url="https://drive.google.com/file/d/1AgbwwGGdQKgDuwIjOYkKzto9vu6GLyR7/view?usp=sharing"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: Scott Pilgrim — CSUN Project">
+          <div class="work-page-thumb">
+            <img src="assets/images/SCOTT-PILGRIM.png"
+                 alt="Scott Pilgrim"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Scott Pilgrim</p>
+                <p class="work-page-category">CSUN Project</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 9 — Hello (CSUN) -->
+        <article class="work-page-card page-load-item page-load-delay-11"
+                 data-video-type="link"
+                 data-video-url="https://drive.google.com/file/d/1QcjUwEf9ZnPZ6r_wj0UQzizCFJUeYX95/view?usp=sharing"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Watch: Hello — CSUN Project">
+          <div class="work-page-thumb">
+            <img src="assets/images/HELLO-FIX.png"
+                 alt="Hello"
+                 class="work-page-thumb-img"
+                 loading="lazy">
+            <div class="work-page-overlay">
+              <div class="work-page-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="work-page-info">
+                <p class="work-page-title">Hello</p>
+                <p class="work-page-category">CSUN Project</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       VIDEO LIGHTBOX
+  ═══════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close video">&times;</button>
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <div class="lightbox-video-wrap">
+        <iframe id="lightbox-iframe"
+                src=""
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                title="Video player">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════ -->
+  <footer class="footer section-dark" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Chris <span>Woodland</span></span>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://instagram.com/Tophwin" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/in/chris-woodland-5528b317b/" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
+
+        <p class="footer-copy">&copy; 2026 Chris Woodland. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Chris Woodland — Video Editor, Filmmaker & Content Creator based in Los Angeles." />
+  <title>About — Chris Woodland</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Pre-paint: if arriving from the work page, mark html so the
+       Contact button renders in its cream state without a flash. -->
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('fromWorkToAbout') === 'true') {
+          document.documentElement.classList.add('from-work-page');
+        }
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
+</head>
+<body class="about-page-body">
+
+  <!-- ═══════════════════════════════════
+       P3-INSPIRED SLASH OVERLAY
+       4 skewed cyan slices pre-positioned
+       covering the screen; JS sweeps them
+       off to the left on arrival.
+  ═══════════════════════════════════ -->
+  <div class="p3-overlay p3-entry" id="p3-overlay" aria-hidden="true">
+    <div class="p3-slice"></div>
+    <div class="p3-slice"></div>
+    <div class="p3-slice"></div>
+    <div class="p3-slice"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════ -->
+  <nav class="nav nav-dark" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">C<span>W</span></a>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta"><span>Contact</span></a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════
+       ABOUT — one seamless section
+  ═══════════════════════════════════ -->
+  <section class="about-section section-cyan" aria-label="About Chris">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- LEFT: title + photos -->
+        <div class="about-left">
+          <h1 class="about-title">
+            <span class="hi page-load-drop">Hi,</span>
+            <span class="name page-load-drop page-load-delay-1">I'm Chris</span>
+          </h1>
+
+          <div class="about-photos page-load-item page-load-delay-2">
+            <img
+              src="assets/images/Chris-2.png"
+              alt="Chris Woodland"
+              class="about-photo"
+            />
+          </div>
+        </div>
+
+        <!-- RIGHT: bio copy -->
+        <div class="about-text">
+          <p class="page-load-item page-load-delay-1">
+            I'm a video editor, filmmaker, and content creator based in Los Angeles, and I genuinely love what I do!
+          </p>
+          <p class="page-load-item page-load-delay-2">
+            One of my favorite things about this work is where it takes you. Freelancing has pulled me into worlds I never expected: traveling internationally, working with renowned restaurants, covering news, building YouTube channels, and creating social campaigns for brands. Every project is a chance to learn something new, and I am so grateful for the experience I've gained from project to project.
+          </p>
+          <p class="page-load-item page-load-delay-3">
+            From working in post to running full shoots on location, I'm most at home when I'm involved in the whole creative process. Whether I'm building out a social strategy for a brand launch or cutting a long-form series from scratch, I bring the same thing every time: show up prepared, work hard, and make something worth watching.
+          </p>
+          <p class="page-load-item page-load-delay-4">
+            That same curiosity led me into a wide range of projects, and that experience has made me adaptable. No matter what space or team, I can jump right in, get up to speed, and start contributing right away.
+          </p>
+          <p class="page-load-item page-load-delay-5">
+            Camera to cut, pre to post, I'm ready to plug in wherever a project needs me. I hope we get to work together soon!
+          </p>
+
+          <div class="about-cta page-load-item page-load-delay-6">
+            <a href="CW_RESUME.pdf" class="btn-carbon" target="_blank" rel="noopener">Resume &nbsp;↓</a>
+            <a href="CW_PORTFOLIO.pdf" class="btn-cream" target="_blank" rel="noopener">Portfolio &nbsp;↓</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════ -->
+  <footer class="footer section-dark" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Chris <span>Woodland</span></span>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://instagram.com/Tophwin" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/in/chris-woodland-5528b317b/" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
+
+        <p class="footer-copy">&copy; 2026 Chris Woodland. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="js/main.js"></script>
+</body>
+</html>

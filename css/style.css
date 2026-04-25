@@ -1,0 +1,1699 @@
+/* ============================================================
+   CHRIS WOODLAND — Global Stylesheet
+   ChrisWoodland.com
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --carbon:  #1C1C1C;
+  --cream:   #FFEBc6;
+  --red:     #00D4FF;
+  --coral:   #00B8E8;
+  --orange:  #FFB100;
+
+  --font-heading: 'Inter', sans-serif;
+  --font-body:    'Source Sans 3', sans-serif;
+
+  --nav-height: 72px;
+  --transition: 0.3s ease;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--carbon);
+  color: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; }
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  transition: background var(--transition), backdrop-filter var(--transition);
+}
+
+.nav.scrolled {
+  background: rgba(28, 28, 28, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 235, 198, 0.08);
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  transition: color var(--transition);
+}
+.nav-logo span { color: var(--orange); }
+.nav-logo:hover { color: var(--orange); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 235, 198, 0.75);
+  transition: color var(--transition);
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--cream); }
+/* CTA button active state: keep text carbon so it stays readable on the cream fill.
+   The filled cream button itself is the "current page" indicator. */
+.nav-links .nav-cta.active { color: var(--carbon); }
+
+/* Animated underline glow on nav links */
+.nav-links a:not(.nav-cta) {
+  position: relative;
+}
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--orange);
+  box-shadow: 0 0 6px var(--orange), 0 0 12px rgba(255,177,0,0.4);
+  transition: width 0.3s ease;
+}
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a:not(.nav-cta).active::after { width: 100%; }
+
+.nav-links .nav-cta {
+  background: var(--red);
+  color: var(--carbon);
+  padding: 9px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+/* Text stays above any pseudo-element layers */
+.nav-links .nav-cta span {
+  position: relative;
+  z-index: 1;
+}
+/* Home page: simple glow on hover — no fill animation */
+.nav-links .nav-cta:hover {
+  background: var(--coral);
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.55), 0 0 32px rgba(0, 212, 255, 0.25);
+}
+
+/* Hamburger (mobile) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.nav-toggle span {
+  display: block;
+  width: 26px; height: 2px;
+  background: var(--cream);
+  border-radius: 2px;
+  transition: all var(--transition);
+  pointer-events: none;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-primary {
+  background: var(--red);
+  color: var(--carbon);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover {
+  background: var(--coral);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.25), 0 8px 24px rgba(0, 212, 255, 0.35);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--carbon);
+  border: 2px solid var(--carbon);
+  position: relative;
+  overflow: hidden;
+}
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--carbon);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+.btn-outline:hover::before { transform: scaleX(1); }
+.btn-outline:hover {
+  color: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(28,28,28,0.25);
+}
+.btn-outline-light {
+  background: transparent;
+  color: var(--cream);
+  border: 2px solid rgba(255,235,198,0.35);
+  position: relative;
+  overflow: hidden;
+}
+.btn-outline-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,235,198,0.07);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+.btn-outline-light:hover::before { transform: scaleX(1); }
+.btn-outline-light:hover {
+  border-color: rgba(255,235,198,0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(255,235,198,0.12), 0 0 28px rgba(255,235,198,0.06);
+}
+
+/* ---------- Section Utilities ---------- */
+.section-dark  { background: var(--carbon); color: var(--cream); }
+.section-light { background: var(--cream);  color: var(--carbon); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.section-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--nav-height) + 60px) 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0, 212, 255, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(255, 177, 0, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; max-width: 900px; }
+
+.hero-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--orange);
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  min-height: 1.1em;
+}
+
+/* Cycling text */
+.cycling-wrapper {
+  display: inline-block;
+  position: relative;
+}
+.cycling-text {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+}
+.cycling-text.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+}
+.cycling-text.exit {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Accent color on last word of cycling text */
+.cycling-text .accent { color: var(--red); }
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  color: rgba(255, 235, 198, 0.65);
+  margin-bottom: 48px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,235,198,0.35);
+}
+.hero-scroll-line {
+  width: 48px; height: 1px;
+  background: rgba(255,235,198,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: var(--orange);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%   { left: -100%; }
+  50%  { left: 0%; }
+  100% { left: 100%; }
+}
+
+/* ---------- Recent Work Strip ---------- */
+.work-strip {
+  padding: 100px 0;
+}
+
+.work-strip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+
+.work-strip-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.work-card {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(28,28,28,0.08);
+  cursor: pointer;
+}
+
+.work-card-thumb {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Placeholder when no image */
+.work-card-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28,28,28,0.12);
+  color: rgba(28,28,28,0.2);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.work-card:hover .work-card-thumb { transform: scale(1.04); }
+
+/* Glow border on card hover */
+.work-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.work-card:hover::after {
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow:
+    inset 0 0 20px rgba(0, 212, 255, 0.08),
+    0 0 24px rgba(0, 212, 255, 0.2),
+    0 0 48px rgba(0, 212, 255, 0.1);
+}
+
+.work-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(28,28,28,0.88) 0%, rgba(28,28,28,0.2) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  z-index: 1;
+}
+.work-card:hover .work-card-overlay { opacity: 1; }
+
+.work-card-info { color: #fff; }
+.work-card-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.work-card-category {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  color: var(--orange);
+}
+
+/* ---------- Logo Strip ---------- */
+.logo-strip {
+  padding: 80px 0;
+  border-top: 1px solid rgba(255,235,198,0.06);
+  border-bottom: 1px solid rgba(255,235,198,0.06);
+}
+
+.logo-strip-label {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-strip-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.logo-placeholder {
+  height: 28px;
+  width: 80px;
+  background: rgba(255,235,198,0.08);
+  border-radius: 3px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+.logo-placeholder:hover {
+  background: rgba(255,235,198,0.16);
+  box-shadow: 0 0 12px rgba(255,177,0,0.2);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: 48px 0;
+  border-top: 1px solid rgba(255,235,198,0.08);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+.footer-logo span { color: var(--orange); }
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+}
+.footer-links a {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,235,198,0.45);
+  transition: color var(--transition), text-shadow var(--transition);
+  position: relative;
+}
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--orange);
+  box-shadow: 0 0 6px var(--orange);
+  transition: width 0.3s ease;
+}
+.footer-links a:hover {
+  color: var(--cream);
+  text-shadow: 0 0 12px rgba(255,235,198,0.25);
+}
+.footer-links a:hover::after { width: 100%; }
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: rgba(255,235,198,0.3);
+}
+
+/* ---------- Work Page: instant orange body (no flash on arrival) ---------- */
+body.work-page-body { background: var(--orange); }
+
+/* ---------- Page Exit Overlay (fires on departing page before nav) ---------- */
+/* Motion blur keyframe — blurry at peak speed, clears as it decelerates */
+@keyframes revealMotionBlur {
+  0%   { filter: blur(12px); }
+  55%  { filter: blur(6px);  }
+  100% { filter: blur(0px);  }
+}
+
+.page-exit-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--orange);
+  z-index: 98; /* sits below nav (z-index:100) so logo + links stay visible */
+  clip-path: circle(0% at var(--exit-x, 50%) var(--exit-y, 36px));
+  pointer-events: none;
+  will-change: clip-path, filter;
+}
+.page-exit-overlay.go {
+  transition: clip-path 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  clip-path: circle(150% at var(--exit-x, 50%) var(--exit-y, 36px));
+  animation: revealMotionBlur 0.85s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+/* ---------- Home page Contact button: cream retreats right→left on arrival from work ---------- */
+.nav-links .nav-cta {
+  position: relative;
+  overflow: hidden;
+}
+.nav-links .nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  transform: scaleX(0);          /* invisible by default */
+  transform-origin: right center;
+  border-radius: inherit;
+  transition: none;
+}
+/* Step 1: JS snaps to cream instantly (no transition) */
+.nav-links .nav-cta.cream-snap::before  { transform: scaleX(1); transition: none; }
+/* Step 2: JS retreats right→left, revealing cyan */
+.nav-links .nav-cta.cream-retreat::before {
+  transform: scaleX(0);
+  transform-origin: left center; /* collapses leftward — cyan revealed right to left */
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Text always above the fill layer */
+.nav-links .nav-cta span { position: relative; z-index: 1; }
+
+/* ---------- Page Reveal (Radial Fill — direct URL access fallback) ---------- */
+.page-reveal {
+  position: fixed;
+  inset: 0;
+  background: var(--orange);
+  z-index: 5;
+  clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 36px));
+  pointer-events: none;
+  will-change: clip-path;
+}
+.page-reveal.go {
+  transition: clip-path 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  clip-path: circle(150% at var(--reveal-x, 50%) var(--reveal-y, 36px));
+  animation: revealMotionBlur 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+/* Once body turns orange the fixed overlay is redundant — hidden cleanly */
+body.orange-ready .page-reveal { display: none; }
+body.orange-ready { background: var(--orange); }
+
+/* Sections + footer sit above the reveal overlay */
+.page-header,
+.work-page { position: relative; z-index: 10; }
+.footer     { position: relative; z-index: 10; }
+
+/* ---------- Section: Orange ---------- */
+/* Sections are transparent — the page-reveal circle IS the background */
+.section-orange {
+  background: transparent;
+  color: var(--carbon);
+}
+
+/* Nav: always dark on orange pages — static, no entrance animation */
+.nav-dark {
+  background: rgba(28, 28, 28, 0.96) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 235, 198, 0.08);
+}
+
+/* Contact button: starts cyan, cream fill sweeps in from left on page load */
+.nav-dark .nav-cta {
+  background: var(--red); /* cyan — matches every other page initially */
+  color: var(--carbon);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.nav-dark .nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  transition: transform 0s; /* no transition until JS fires the fill */
+}
+/* JS adds .contact-fill to trigger the horizontal wipe */
+.nav-dark .nav-cta.contact-fill::before {
+  transform: scaleX(1);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-dark .nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(255, 235, 198, 0.35), 0 0 32px rgba(255, 235, 198, 0.12);
+}
+
+/* Eyebrow overrides on orange bg */
+.section-orange .hero-eyebrow {
+  color: rgba(28,28,28,0.55);
+}
+.section-orange .hero-eyebrow::before {
+  background: rgba(28,28,28,0.4);
+}
+
+/* Accent dot on page title — use carbon on orange instead of cyan */
+.section-orange .page-header-title .accent {
+  color: var(--carbon);
+  text-shadow: none;
+}
+
+.section-orange .page-header-sub {
+  color: rgba(28,28,28,0.45);
+}
+
+/* Cards on orange — cream/white cards that lift off the warm background */
+.section-orange .work-page-card {
+  background: var(--cream);
+  box-shadow: 0 4px 24px rgba(28,28,28,0.14);
+}
+.section-orange .work-page-card:hover {
+  box-shadow: 0 10px 40px rgba(28,28,28,0.22);
+  transform: translateY(-4px);
+}
+.section-orange .work-page-placeholder {
+  background: linear-gradient(135deg, rgba(28,28,28,0.07) 0%, rgba(28,28,28,0.03) 100%);
+  border: 1px solid rgba(28,28,28,0.08);
+}
+
+/* Glow border: carbon on orange for a dark punch */
+.section-orange .work-page-card:hover::after,
+.section-orange .work-page-card:focus-visible::after {
+  border-color: rgba(28,28,28,0.5);
+  box-shadow:
+    inset 0 0 20px rgba(28,28,28,0.04),
+    0 0 28px rgba(28,28,28,0.18),
+    0 0 56px rgba(28,28,28,0.08);
+}
+
+/* Play button on orange-bg cards — use carbon ring, cyan icon */
+.section-orange .work-page-play {
+  background: rgba(28,28,28,0.1);
+  border-color: rgba(28,28,28,0.5);
+  color: var(--carbon);
+}
+.section-orange .work-page-card:hover .work-page-play {
+  background: rgba(28,28,28,0.18);
+  box-shadow: 0 0 20px rgba(28,28,28,0.25);
+}
+
+/* Category label on orange — use carbon, stands out clearly */
+.section-orange .work-page-category {
+  color: rgba(28,28,28,0.55);
+}
+
+/* ---------- Page Load Animations ---------- */
+
+/* Cards / content: rise up from below */
+.page-load-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+body.loaded .page-load-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header elements: drop down from above */
+.page-load-drop {
+  opacity: 0;
+  transform: translateY(-36px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+body.loaded .page-load-drop {
+  opacity: 1;
+  transform: translateY(0);
+}
+.page-load-delay-1 { transition-delay: 0.12s; }
+.page-load-delay-2 { transition-delay: 0.24s; }
+.page-load-delay-3 { transition-delay: 0.38s; }
+.page-load-delay-4 { transition-delay: 0.48s; }
+.page-load-delay-5 { transition-delay: 0.58s; }
+.page-load-delay-6 { transition-delay: 0.68s; }
+.page-load-delay-7 { transition-delay: 0.78s; }
+.page-load-delay-8 { transition-delay: 0.88s; }
+.page-load-delay-9  { transition-delay: 0.98s; }
+.page-load-delay-10 { transition-delay: 1.08s; }
+.page-load-delay-11 { transition-delay: 1.18s; }
+
+/* ---------- Page Header (Work / About / Contact) ---------- */
+.page-header {
+  padding: calc(var(--nav-height) + 80px) 0 64px;
+  border-bottom: 1px solid rgba(255,235,198,0.06);
+}
+.page-header-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.page-header-title .accent {
+  color: var(--red);
+  text-shadow: 0 0 24px rgba(0, 212, 255, 0.5), 0 0 48px rgba(0, 212, 255, 0.2);
+}
+.page-header-sub {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,235,198,0.35);
+}
+
+/* ---------- Work Page Grid ---------- */
+.work-page { padding: 80px 0 120px; }
+
+.work-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.work-page-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 20px rgba(28,28,28,0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.work-page-card:hover {
+  box-shadow: 0 8px 36px rgba(28,28,28,0.15);
+  transform: translateY(-3px);
+}
+.work-page-card:focus-visible {
+  box-shadow: 0 0 0 3px var(--red);
+}
+
+.work-page-thumb {
+  position: relative;
+  aspect-ratio: 16/10;
+  background: rgba(255,235,198,0.04);
+}
+
+/* Real thumbnail images inside work page cards */
+.work-page-thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+.work-page-card:hover .work-page-thumb-img { transform: scale(1.04); }
+
+/* Homepage work cards as block links */
+a.work-card { display: block; }
+
+.work-page-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(28,28,28,0.07) 0%, rgba(28,28,28,0.04) 100%);
+  border: 1px solid rgba(28,28,28,0.08);
+}
+
+/* Glow border on hover — same system as home cards */
+.work-page-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+.work-page-card:hover::after,
+.work-page-card:focus-visible::after {
+  border-color: rgba(0, 212, 255, 0.7);
+  box-shadow:
+    inset 0 0 20px rgba(0, 212, 255, 0.08),
+    0 0 28px rgba(0, 212, 255, 0.35),
+    0 0 56px rgba(0, 212, 255, 0.15);
+}
+
+.work-page-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(28,28,28,0.92) 0%, rgba(28,28,28,0.2) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 2;
+}
+.work-page-card:hover .work-page-overlay,
+.work-page-card:focus-visible .work-page-overlay { opacity: 1; }
+
+.work-page-play {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.15);
+  border: 1.5px solid rgba(0, 212, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--red);
+  transform: scale(0.85);
+  transition: transform 0.3s ease, background 0.3s ease,
+              box-shadow 0.3s ease;
+}
+.work-page-card:hover .work-page-play {
+  transform: scale(1);
+  background: rgba(0, 212, 255, 0.22);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.35), 0 0 40px rgba(0, 212, 255, 0.15);
+}
+
+.work-page-info {
+  text-align: center;
+  color: #fff;
+}
+.work-page-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.work-page-category {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox[hidden] { display: none; }
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.lightbox-content {
+  position: relative;
+  z-index: 1;
+  width: min(90vw, 1100px);
+}
+
+.lightbox-video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(0, 212, 255, 0.15), 0 32px 80px rgba(0,0,0,0.6);
+}
+.lightbox-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 24px; right: 28px;
+  z-index: 2;
+  background: rgba(255,235,198,0.08);
+  border: 1px solid rgba(255,235,198,0.15);
+  color: var(--cream);
+  font-size: 1.5rem;
+  line-height: 1;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.lightbox-close:hover {
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.3);
+  transform: scale(1.08);
+}
+
+/* Lightbox open animation */
+.lightbox-content {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.lightbox.open .lightbox-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Work page responsive ---------- */
+@media (max-width: 900px) {
+  .work-page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .work-page { overflow: hidden; }
+}
+@media (max-width: 560px) {
+  /* Keep 2-per-row on mobile — tighter gap for small screens */
+  .work-page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+}
+
+/* ---------- Small-screen overrides (≤ 540px — typical phone width) ---------- */
+@media (max-width: 540px) {
+  /* Hero title: scale down so the longest word "Videographer." doesn't clip */
+  .hero-title { font-size: clamp(1.85rem, 9vw, 3rem); }
+
+  /* Hero CTA buttons: stack full-width so neither button looks squished */
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 24px;
+    font-size: 0.95rem;
+  }
+
+  /* Hero tagline: slightly larger and brighter so it reads more on mobile */
+  .hero-tagline {
+    font-size: 1.05rem;
+    color: rgba(255, 235, 198, 0.8);
+    margin-bottom: 36px;
+  }
+
+  /* Hero eyebrow: give it a bit more presence on mobile */
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    margin-bottom: 20px;
+  }
+
+  /* Work page cards: taller aspect ratio at 2-per-row so content isn't compressed */
+  .work-page-thumb { aspect-ratio: 3/4; }
+  /* Scale down the overlay content to fit the narrower cards */
+  .work-page-play { width: 36px; height: 36px; }
+  .work-page-title { font-size: 0.82rem; }
+  .work-page-category { font-size: 0.62rem; letter-spacing: 0.1em; }
+  /* Placeholder text */
+  .work-page-placeholder { font-size: 0.62rem; }
+
+  /* About: stack photos back to column so neither gets cut off on narrow screens */
+  .about-photos {
+    flex-direction: column;
+    max-width: 100%;
+  }
+  .about-photo-placeholder.tall,
+  .about-photo.tall { flex: none; width: 100%; aspect-ratio: 4/5; }
+  .about-photo-placeholder.wide,
+  .about-photo.wide { flex: none; width: 100%; aspect-ratio: 5/3; }
+
+  /* Contact: ensure title and sub-copy don't overflow viewport */
+  .contact-title { font-size: clamp(2.6rem, 11vw, 4rem); word-break: break-word; }
+  .contact-sub { max-width: 100%; }
+  .contact-section { overflow: hidden; }
+
+  /* Footer: wrap nav + social links so LinkedIn doesn't get cut off.
+     A JS-injected `.footer-links-break` element forces a wrap BEFORE the
+     Instagram link, so Work/About/Contact sit on row 1 and
+     Instagram + LinkedIn stay together on row 2 (never split). */
+  .footer-inner {
+    gap: 24px;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 20px;
+  }
+  .footer-links-break {
+    flex-basis: 100%;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+/* Break element is harmless on desktop (no width, no height) but we hide it
+   explicitly above the mobile breakpoint to keep the desktop flex row clean. */
+@media (min-width: 901px) {
+  .footer-links-break { display: none; }
+}
+
+/* ---------- Scroll Reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+
+/* ---------- Hero accent glow on cycling text ---------- */
+.cycling-text .accent {
+  color: var(--red);
+  text-shadow: 0 0 24px rgba(0, 212, 255, 0.5), 0 0 48px rgba(0, 212, 255, 0.2);
+}
+
+/* ══════════════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════════════ */
+
+/* Instant cyan body — prevents flash on direct URL visit */
+body.about-page-body { background: var(--red); }
+
+/* About section sits above the P3 overlay */
+.about-section { position: relative; z-index: 10; }
+
+/* Section base: transparent over the cyan body */
+.section-cyan {
+  background: transparent;
+  color: var(--carbon);
+}
+
+/* ── About section layout ──────────────────── */
+.about-section {
+  padding: calc(var(--nav-height) + 96px) 0 140px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ── Big stacked title ─────────────────────── */
+.about-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(3.8rem, 9vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--carbon);
+  margin: 0;
+}
+.about-title .hi,
+.about-title .name {
+  display: block;
+}
+.about-title .name {
+  margin-top: 0.04em;
+}
+/* Period mark — carbon, same weight as the text.
+   A clean modern alternative to the glowing accent. */
+.about-title .stop {
+  color: var(--carbon);
+}
+
+/* ── Photo placeholders (under the title) ──── */
+.about-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 440px;
+}
+.about-photo-placeholder {
+  width: 100%;
+  background: rgba(28, 28, 28, 0.07);
+  border-radius: 8px;
+  border: 1.5px solid rgba(28, 28, 28, 0.13);
+}
+.about-photo-placeholder.tall { aspect-ratio: 4/5; }
+.about-photo-placeholder.wide { aspect-ratio: 5/3; }
+
+/* ── Real photo (replaces placeholder once asset is available) ── */
+.about-photo {
+  width: 100%;
+  height: auto;           /* preserve natural aspect ratio — no cropping */
+  border-radius: 8px;
+  display: block;
+  object-fit: unset;      /* show full image, never crop */
+}
+.about-photo.wide  { aspect-ratio: 5/3; object-fit: cover; }
+
+/* ── Bio text column ───────────────────────── */
+/* padding-top removed so the first paragraph's cap-height aligns
+   with the top of the "Hi," heading in the left column. */
+.about-text { padding-top: 0; }
+
+.about-text p {
+  font-family: var(--font-body);
+  font-size: clamp(1.02rem, 1.55vw, 1.18rem);
+  line-height: 1.72;
+  color: var(--carbon);
+  font-weight: 600;      /* bold — stays crisp on the bright cyan bg */
+  margin-bottom: 1.35em;
+}
+.about-text p:last-of-type { margin-bottom: 0; }
+
+/* CTA row beneath bio */
+.about-cta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2.6rem;
+}
+
+/* ── Buttons: dark variants for light/cyan backgrounds ── */
+.btn-carbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--carbon);
+  color: var(--cream);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-carbon:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(28, 28, 28, 0.25);
+}
+
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--carbon);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: 4px;
+  border: 2px solid rgba(28, 28, 28, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.btn-outline-dark:hover {
+  border-color: var(--carbon);
+  background: rgba(28, 28, 28, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Cream solid button — pops against the cyan about background.
+   Mirrors .btn-carbon's shape with inverted colors so it reads as a
+   sibling to the Contact CTA in the nav. */
+.btn-cream {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cream);
+  color: var(--carbon);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-cream:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(28, 28, 28, 0.22);
+}
+
+/* About-page-only compressed page-load stagger.
+   The shared .page-load-delay-N values are tuned for the work page's
+   long radial reveal (~1.1s). The about P3 slash finishes in ~890ms,
+   so we compress the stagger here so every element has finished or is
+   nearly finished animating by the time the last slice sweeps off —
+   no items "pop in" late after the cyan is gone. */
+body.about-page-body .page-load-delay-1 { transition-delay: 0.05s; }
+body.about-page-body .page-load-delay-2 { transition-delay: 0.12s; }
+body.about-page-body .page-load-delay-3 { transition-delay: 0.20s; }
+body.about-page-body .page-load-delay-4 { transition-delay: 0.28s; }
+body.about-page-body .page-load-delay-5 { transition-delay: 0.36s; }
+body.about-page-body .page-load-delay-6 { transition-delay: 0.44s; }
+
+/* ──────────────────────────────────────────────
+   P3-INSPIRED SLASH TRANSITION
+   Desktop: 4 skewed cyan parallelograms that
+   translate in/out (the original approved look).
+   Mobile (≤900px): single clip-path sweep on the
+   overlay — cleaner on narrow screens with no
+   left-side gap.
+────────────────────────────────────────────── */
+.p3-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 98;             /* below nav (100), above content (10) */
+  pointer-events: none;
+  display: flex;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ── DESKTOP slices: skewed parallelograms, translate in/out ── */
+.p3-slice {
+  flex: 0 0 25%;           /* fixed 25% — no grow/shrink */
+  height: 170%;            /* tall enough that skew can't expose page below */
+  margin: -35% 0;          /* vertical bleed only */
+  transform: skewX(-14deg) translateX(150vw); /* default: off-screen right */
+  will-change: transform;
+}
+/* Slice 4 needs extra width to plug the bottom-right corner gap created by skewX. */
+.p3-slice:nth-child(4) {
+  flex-basis: calc(25% + 24.93vh + 4px);
+}
+/* Deepest cyan on the LEFT, lightest on the RIGHT.
+   Entry stagger sweeps slices off 1→4, so the last colour the user sees
+   before the body is revealed is #00D4FF — which exactly matches
+   body.about-page-body for a seamless reveal. */
+.p3-slice:nth-child(1) { background: #007EA8; } /* deepest  (leaves first on entry) */
+.p3-slice:nth-child(2) { background: #009BC8; }
+.p3-slice:nth-child(3) { background: #00B8E8; }
+.p3-slice:nth-child(4) { background: #00D4FF; } /* lightest (leaves last, = body cyan) */
+
+/* Desktop EXIT: slices slide in from the right, staggered right→left */
+.p3-overlay.p3-exit .p3-slice {
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.p3-overlay.p3-exit.go .p3-slice {
+  transform: skewX(-14deg) translateX(-10px); /* tiny overshoot seals any sub-pixel gap */
+}
+.p3-overlay.p3-exit .p3-slice:nth-child(4) { transition-delay: 0s;    }
+.p3-overlay.p3-exit .p3-slice:nth-child(3) { transition-delay: 0.08s; }
+.p3-overlay.p3-exit .p3-slice:nth-child(2) { transition-delay: 0.16s; }
+.p3-overlay.p3-exit .p3-slice:nth-child(1) { transition-delay: 0.24s; }
+
+/* Desktop ENTRY: slices start covering the screen, slide off to the left */
+.p3-overlay.p3-entry .p3-slice {
+  transform: skewX(-14deg) translateX(0); /* fully covers screen on page load */
+  transition: transform 0.65s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.p3-overlay.p3-entry.go .p3-slice {
+  transform: skewX(-14deg) translateX(-160vw);
+}
+.p3-overlay.p3-entry .p3-slice:nth-child(1) { transition-delay: 0s;    }
+.p3-overlay.p3-entry .p3-slice:nth-child(2) { transition-delay: 0.08s; }
+.p3-overlay.p3-entry .p3-slice:nth-child(3) { transition-delay: 0.16s; }
+.p3-overlay.p3-entry .p3-slice:nth-child(4) { transition-delay: 0.24s; }
+
+/* Once all desktop slices are gone, retire the overlay */
+body.cyan-ready .p3-overlay { display: none; }
+
+/* ── MOBILE override (≤900px): clip-path sweep ─────────────────
+   Replaces the translateX slices with a single diagonal clip-path
+   animated on the overlay itself. No background rectangle ever
+   paints before motion starts (zero blue flash), and the left
+   side is covered first on exit so there's no left-edge gap. */
+@media (max-width: 900px) {
+  .p3-overlay { will-change: clip-path; }
+
+  /* Reset slices to simple vertical pillars — clip-path handles shape */
+  .p3-slice {
+    flex: 1 1 25%;
+    height: 100%;
+    margin: 0;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+  .p3-slice:nth-child(4) { flex-basis: 25%; } /* remove the desktop corner bleed */
+
+  /* Exit: zero-area polygon on left → full cover with diagonal right edge */
+  .p3-overlay.p3-exit {
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+    transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1) !important;
+  }
+  .p3-overlay.p3-exit.go {
+    clip-path: polygon(0% 0%, 130% 0%, 100% 100%, 0% 100%) !important;
+  }
+
+  /* Entry: mirror of exit — same diagonal start, collapses to right edge */
+  .p3-overlay.p3-entry {
+    clip-path: polygon(0% 0%, 130% 0%, 100% 100%, 0% 100%);
+    transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1) !important;
+  }
+  .p3-overlay.p3-entry.go {
+    clip-path: polygon(130% 0%, 130% 0%, 100% 100%, 100% 100%) !important;
+  }
+}
+
+/* ── Contact button: instant cream (no animation) variant ──
+   Used when arriving at about from the work page — the button
+   is already in its cream state there, so we skip the sweep. */
+.nav-dark .nav-cta.contact-instant::before {
+  transform: scaleX(1);
+  transition: none;
+}
+/* Pre-paint: if the inline head script set html.from-work-page (about page)
+   or html.from-about-page (work page), render the cream layer immediately. */
+html.from-work-page .nav-dark .nav-cta::before,
+html.from-about-page .nav-dark .nav-cta::before {
+  transform: scaleX(1);
+  transition: none;
+}
+
+/* ── About responsive ──────────────────────── */
+@media (max-width: 900px) {
+  .about-section {
+    padding: calc(var(--nav-height) + 64px) 0 100px;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .about-left { gap: 32px; }
+  .about-title {
+    font-size: clamp(3.4rem, 13vw, 5.5rem);
+  }
+  .about-photos {
+    flex-direction: row;
+    max-width: none;
+  }
+  .about-photo-placeholder.tall,
+  .about-photo.tall {
+    flex: 1 1 45%;
+    aspect-ratio: 1/1;
+  }
+  .about-photo-placeholder.wide,
+  .about-photo.wide {
+    flex: 1 1 55%;
+    aspect-ratio: 4/3;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   CONTACT PAGE
+══════════════════════════════════════════════ */
+
+/* Pre-paint the Contact CTA cream on the contact page itself —
+   set by an inline <head> script before first paint. */
+html.contact-page .nav-dark .nav-cta::before {
+  transform: scaleX(1);
+  transition: none;
+}
+
+/* ── Contact section layout ────────────────── */
+.contact-section {
+  padding: calc(var(--nav-height) + 96px) 0 140px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ── Left column ─────────────────────────────── */
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  position: sticky;
+  top: calc(var(--nav-height) + 48px);
+}
+
+.contact-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--cream);
+  margin: 0;
+}
+.contact-title span { display: block; }
+
+.contact-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 235, 198, 0.65);
+  max-width: 380px;
+  font-weight: 400;
+}
+
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-social-link {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+}
+.contact-social-link:hover { opacity: 1; }
+
+/* ── Right column: form ────────────────────── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 235, 198, 0.4);
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(255, 235, 198, 0.04);
+  border: 1px solid rgba(255, 235, 198, 0.12);
+  border-radius: 4px;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 14px 16px;
+  width: 100%;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 235, 198, 0.22);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--red); /* cyan accent */
+  background: rgba(255, 235, 198, 0.06);
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.65;
+}
+
+/* Submit button: cream fill — pops on carbon bg, mirrors Contact CTA shape */
+.btn-submit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  color: var(--carbon);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  padding: 16px 32px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: 4px;
+}
+.btn-submit:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 235, 198, 0.14);
+}
+
+/* ── Contact responsive ────────────────────── */
+@media (max-width: 900px) {
+  .contact-section {
+    padding: calc(var(--nav-height) + 64px) 0 100px;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .contact-left {
+    position: static; /* unstick on mobile */
+  }
+  .contact-title {
+    font-size: clamp(3.4rem, 13vw, 5rem);
+  }
+  .contact-sub { max-width: 100%; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  /* Nav bar: always dark on mobile so the hamburger icon is readable on any page background.
+     IMPORTANT: NO backdrop-filter on any nav variant on mobile — backdrop-filter creates a
+     new containing block for position:fixed descendants, which would trap .nav-links.open
+     inside the 72px nav bar instead of letting it cover the full viewport. This was the
+     root cause of the mobile dropdown menu not appearing centered / full-screen. */
+  .nav,
+  .nav.scrolled,
+  .nav-dark {
+    padding: 0 24px;
+    background: rgba(28, 28, 28, 0.95) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid rgba(255, 235, 198, 0.08);
+  }
+  .nav-links { display: none; }
+
+  /* Full-screen overlay menu — forced dark on every page, text always centered */
+  .nav-links.open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: #1C1C1C !important;   /* hard-coded so orange/cyan page bodies can't bleed */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    z-index: 200;                      /* above everything: page content, overlays, nav */
+    padding: 0 32px;
+  }
+  .nav-links.open li {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .nav-links.open a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: var(--cream) !important;   /* override any page-specific link colours */
+  }
+  /* Active page link gets the orange underline glow */
+  .nav-links.open a.active { color: var(--orange) !important; }
+  /* Contact CTA: use the standard cyan pill in the overlay */
+  .nav-links.open .nav-cta {
+    display: inline-block;
+    width: auto;
+    background: var(--red) !important;
+    color: var(--carbon) !important;
+    padding: 12px 32px;
+    border-radius: 4px;
+  }
+  /* Hide the hamburger toggle inside the overlay (button stays in the nav bar, above z-200) */
+  .nav-toggle { display: flex; z-index: 201; }
+
+  /* Hero: less top padding so content sits higher, more bottom padding for scroll icon */
+  .hero { padding: calc(var(--nav-height) + 20px) 24px 100px; justify-content: flex-start; }
+  .hero-scroll { left: 24px; bottom: 28px; }
+  .hero-content { max-width: 100%; }
+
+  .container { padding: 0 24px; }
+
+  .work-strip { overflow: hidden; }
+  .work-strip-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .work-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
